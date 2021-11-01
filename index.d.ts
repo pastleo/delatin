@@ -1,7 +1,7 @@
 declare module 'delatin' {
   export default class Delatin {
     constructor(
-      data: number[],
+      data: number[] | ((x: number, y: number) => number),
       width: number, height?: number
     );
 

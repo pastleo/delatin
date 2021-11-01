@@ -1,8 +1,20 @@
 
 export default class Delatin {
 
-    constructor(data, width, height = width) {
-        this.data = data; // height data
+    constructor(dataOrHeightAt, width, height = width) {
+        if (typeof dataOrHeightAt === 'function') {
+            this.data = Array(width * height); // height data
+            this.heightAt = (x, y) => {
+                const index = this.width * y + x;
+                if (this.data[index] === undefined) {
+                    this.data[index] = dataOrHeightAt(x, y);
+                }
+                return this.data[index]
+            }
+        } else {
+            this.data = dataOrHeightAt; // height data
+        }
+
         this.width = width;
         this.height = height;
 
